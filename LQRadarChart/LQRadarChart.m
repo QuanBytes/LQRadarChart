@@ -86,12 +86,15 @@
     for (NSInteger index = 0; index<numOfRow; index ++) {
         NSInteger i = (CGFloat)index;
         NSString * title = [_dataSource titleOfRowForRadarChart:self row:index];
-        CGPoint pointOnEdge = CGPointMake(_centerPoint.x - radius * sin(i * perAngle), _centerPoint.y - radius * cos(i * perAngle));
+        CGPoint pointOnEdge = CGPointMake(_centerPoint.x - radius * sin(i * perAngle),
+                                          _centerPoint.y - radius * cos(i * perAngle));
         CGSize attributeTextSize = [title sizeWithAttributes:@{NSFontAttributeName:textFont}];
+        
         CGFloat width = attributeTextSize.width;
         CGFloat xOffset = pointOnEdge.x >=  _centerPoint .x ? width / 2.0 + padding : -width / 2.0 - padding;
         CGFloat yOffset = pointOnEdge.y >=  _centerPoint .y ? height / 2.0 + padding : -height / 2.0 - padding;
-        CGPoint legendCenter = CGPointMake(pointOnEdge.x + xOffset, pointOnEdge.y + yOffset);
+        CGPoint legendCenter = CGPointMake(pointOnEdge.x + xOffset,
+                                           pointOnEdge.y + yOffset);
         
         NSMutableParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyle].mutableCopy;
         paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -108,6 +111,7 @@
         [title drawInRect:rect withAttributes:attributes];
     }
     
+    /// Draw the background rectangle
     CGContextSaveGState(context);
     [lineColor setStroke];
     
@@ -144,8 +148,8 @@
         
     }
     CGContextRestoreGState(context);
-    [lineColor setStroke];
     
+    [lineColor setStroke];
     for (NSInteger index = 0; index < numOfRow; index ++) {
         CGFloat i = (CGFloat)(index);
         UIBezierPath * path = [UIBezierPath bezierPath];

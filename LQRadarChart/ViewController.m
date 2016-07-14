@@ -107,7 +107,7 @@
 }
 - (UIFont *)fontOfTitleForRadarChart:(LQRadarChart *)radarChart
 {
-    return [UIFont systemFontOfSize:14];
+    return [UIFont systemFontOfSize:11];
 
 }
 
