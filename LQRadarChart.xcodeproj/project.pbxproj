@@ -1,0 +1,527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D7FEA8081D3788DB0096B237 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FEA8071D3788DB0096B237 /* main.m */; };
+		D7FEA80B1D3788DB0096B237 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FEA80A1D3788DB0096B237 /* AppDelegate.m */; };
+		D7FEA80E1D3788DB0096B237 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FEA80D1D3788DB0096B237 /* ViewController.m */; };
+		D7FEA8111D3788DB0096B237 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7FEA80F1D3788DB0096B237 /* Main.storyboard */; };
+		D7FEA8131D3788DB0096B237 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7FEA8121D3788DB0096B237 /* Assets.xcassets */; };
+		D7FEA8161D3788DB0096B237 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7FEA8141D3788DB0096B237 /* LaunchScreen.storyboard */; };
+		D7FEA8211D3788DB0096B237 /* LQRadarChartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FEA8201D3788DB0096B237 /* LQRadarChartTests.m */; };
+		D7FEA82C1D3788DB0096B237 /* LQRadarChartUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FEA82B1D3788DB0096B237 /* LQRadarChartUITests.m */; };
+		D7FEA83B1D378AC80096B237 /* LQRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D7FEA83A1D378AC80096B237 /* LQRadarChart.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D7FEA81D1D3788DB0096B237 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7FEA7FB1D3788DA0096B237 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7FEA8021D3788DB0096B237;
+			remoteInfo = LQRadarChart;
+		};
+		D7FEA8281D3788DB0096B237 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7FEA7FB1D3788DA0096B237 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7FEA8021D3788DB0096B237;
+			remoteInfo = LQRadarChart;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D7FEA8031D3788DB0096B237 /* LQRadarChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LQRadarChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7FEA8071D3788DB0096B237 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D7FEA8091D3788DB0096B237 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D7FEA80A1D3788DB0096B237 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D7FEA80C1D3788DB0096B237 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D7FEA80D1D3788DB0096B237 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D7FEA8101D3788DB0096B237 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D7FEA8121D3788DB0096B237 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D7FEA8151D3788DB0096B237 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D7FEA8171D3788DB0096B237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7FEA81C1D3788DB0096B237 /* LQRadarChartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LQRadarChartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7FEA8201D3788DB0096B237 /* LQRadarChartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQRadarChartTests.m; sourceTree = "<group>"; };
+		D7FEA8221D3788DB0096B237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7FEA8271D3788DB0096B237 /* LQRadarChartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LQRadarChartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7FEA82B1D3788DB0096B237 /* LQRadarChartUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LQRadarChartUITests.m; sourceTree = "<group>"; };
+		D7FEA82D1D3788DB0096B237 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7FEA8391D378AC80096B237 /* LQRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LQRadarChart.h; sourceTree = "<group>"; };
+		D7FEA83A1D378AC80096B237 /* LQRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LQRadarChart.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D7FEA8001D3788DB0096B237 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FEA8191D3788DB0096B237 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FEA8241D3788DB0096B237 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D7FEA7FA1D3788DA0096B237 = {
+			isa = PBXGroup;
+			children = (
+				D7FEA8051D3788DB0096B237 /* LQRadarChart */,
+				D7FEA81F1D3788DB0096B237 /* LQRadarChartTests */,
+				D7FEA82A1D3788DB0096B237 /* LQRadarChartUITests */,
+				D7FEA8041D3788DB0096B237 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D7FEA8041D3788DB0096B237 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7FEA8031D3788DB0096B237 /* LQRadarChart.app */,
+				D7FEA81C1D3788DB0096B237 /* LQRadarChartTests.xctest */,
+				D7FEA8271D3788DB0096B237 /* LQRadarChartUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D7FEA8051D3788DB0096B237 /* LQRadarChart */ = {
+			isa = PBXGroup;
+			children = (
+				D7FEA8091D3788DB0096B237 /* AppDelegate.h */,
+				D7FEA80A1D3788DB0096B237 /* AppDelegate.m */,
+				D7FEA80C1D3788DB0096B237 /* ViewController.h */,
+				D7FEA80D1D3788DB0096B237 /* ViewController.m */,
+				D7FEA8391D378AC80096B237 /* LQRadarChart.h */,
+				D7FEA83A1D378AC80096B237 /* LQRadarChart.m */,
+				D7FEA80F1D3788DB0096B237 /* Main.storyboard */,
+				D7FEA8121D3788DB0096B237 /* Assets.xcassets */,
+				D7FEA8141D3788DB0096B237 /* LaunchScreen.storyboard */,
+				D7FEA8171D3788DB0096B237 /* Info.plist */,
+				D7FEA8061D3788DB0096B237 /* Supporting Files */,
+			);
+			path = LQRadarChart;
+			sourceTree = "<group>";
+		};
+		D7FEA8061D3788DB0096B237 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D7FEA8071D3788DB0096B237 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D7FEA81F1D3788DB0096B237 /* LQRadarChartTests */ = {
+			isa = PBXGroup;
+			children = (
+				D7FEA8201D3788DB0096B237 /* LQRadarChartTests.m */,
+				D7FEA8221D3788DB0096B237 /* Info.plist */,
+			);
+			path = LQRadarChartTests;
+			sourceTree = "<group>";
+		};
+		D7FEA82A1D3788DB0096B237 /* LQRadarChartUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D7FEA82B1D3788DB0096B237 /* LQRadarChartUITests.m */,
+				D7FEA82D1D3788DB0096B237 /* Info.plist */,
+			);
+			path = LQRadarChartUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D7FEA8021D3788DB0096B237 /* LQRadarChart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7FEA8301D3788DB0096B237 /* Build configuration list for PBXNativeTarget "LQRadarChart" */;
+			buildPhases = (
+				D7FEA7FF1D3788DB0096B237 /* Sources */,
+				D7FEA8001D3788DB0096B237 /* Frameworks */,
+				D7FEA8011D3788DB0096B237 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LQRadarChart;
+			productName = LQRadarChart;
+			productReference = D7FEA8031D3788DB0096B237 /* LQRadarChart.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D7FEA81B1D3788DB0096B237 /* LQRadarChartTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7FEA8331D3788DB0096B237 /* Build configuration list for PBXNativeTarget "LQRadarChartTests" */;
+			buildPhases = (
+				D7FEA8181D3788DB0096B237 /* Sources */,
+				D7FEA8191D3788DB0096B237 /* Frameworks */,
+				D7FEA81A1D3788DB0096B237 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7FEA81E1D3788DB0096B237 /* PBXTargetDependency */,
+			);
+			name = LQRadarChartTests;
+			productName = LQRadarChartTests;
+			productReference = D7FEA81C1D3788DB0096B237 /* LQRadarChartTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D7FEA8261D3788DB0096B237 /* LQRadarChartUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7FEA8361D3788DB0096B237 /* Build configuration list for PBXNativeTarget "LQRadarChartUITests" */;
+			buildPhases = (
+				D7FEA8231D3788DB0096B237 /* Sources */,
+				D7FEA8241D3788DB0096B237 /* Frameworks */,
+				D7FEA8251D3788DB0096B237 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7FEA8291D3788DB0096B237 /* PBXTargetDependency */,
+			);
+			name = LQRadarChartUITests;
+			productName = LQRadarChartUITests;
+			productReference = D7FEA8271D3788DB0096B237 /* LQRadarChartUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7FEA7FB1D3788DA0096B237 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = LiQuan;
+				TargetAttributes = {
+					D7FEA8021D3788DB0096B237 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					D7FEA81B1D3788DB0096B237 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = D7FEA8021D3788DB0096B237;
+					};
+					D7FEA8261D3788DB0096B237 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = D7FEA8021D3788DB0096B237;
+					};
+				};
+			};
+			buildConfigurationList = D7FEA7FE1D3788DA0096B237 /* Build configuration list for PBXProject "LQRadarChart" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D7FEA7FA1D3788DA0096B237;
+			productRefGroup = D7FEA8041D3788DB0096B237 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D7FEA8021D3788DB0096B237 /* LQRadarChart */,
+				D7FEA81B1D3788DB0096B237 /* LQRadarChartTests */,
+				D7FEA8261D3788DB0096B237 /* LQRadarChartUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D7FEA8011D3788DB0096B237 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7FEA8161D3788DB0096B237 /* LaunchScreen.storyboard in Resources */,
+				D7FEA8131D3788DB0096B237 /* Assets.xcassets in Resources */,
+				D7FEA8111D3788DB0096B237 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FEA81A1D3788DB0096B237 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FEA8251D3788DB0096B237 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D7FEA7FF1D3788DB0096B237 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7FEA80E1D3788DB0096B237 /* ViewController.m in Sources */,
+				D7FEA80B1D3788DB0096B237 /* AppDelegate.m in Sources */,
+				D7FEA83B1D378AC80096B237 /* LQRadarChart.m in Sources */,
+				D7FEA8081D3788DB0096B237 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FEA8181D3788DB0096B237 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7FEA8211D3788DB0096B237 /* LQRadarChartTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7FEA8231D3788DB0096B237 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7FEA82C1D3788DB0096B237 /* LQRadarChartUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D7FEA81E1D3788DB0096B237 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7FEA8021D3788DB0096B237 /* LQRadarChart */;
+			targetProxy = D7FEA81D1D3788DB0096B237 /* PBXContainerItemProxy */;
+		};
+		D7FEA8291D3788DB0096B237 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7FEA8021D3788DB0096B237 /* LQRadarChart */;
+			targetProxy = D7FEA8281D3788DB0096B237 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D7FEA80F1D3788DB0096B237 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7FEA8101D3788DB0096B237 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D7FEA8141D3788DB0096B237 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7FEA8151D3788DB0096B237 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D7FEA82E1D3788DB0096B237 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D7FEA82F1D3788DB0096B237 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D7FEA8311D3788DB0096B237 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LQRadarChart/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = LQ.LQRadarChart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D7FEA8321D3788DB0096B237 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LQRadarChart/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = LQ.LQRadarChart;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D7FEA8341D3788DB0096B237 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LQRadarChartTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = LQ.LQRadarChartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LQRadarChart.app/LQRadarChart";
+			};
+			name = Debug;
+		};
+		D7FEA8351D3788DB0096B237 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LQRadarChartTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = LQ.LQRadarChartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LQRadarChart.app/LQRadarChart";
+			};
+			name = Release;
+		};
+		D7FEA8371D3788DB0096B237 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LQRadarChartUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = LQ.LQRadarChartUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LQRadarChart;
+			};
+			name = Debug;
+		};
+		D7FEA8381D3788DB0096B237 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LQRadarChartUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = LQ.LQRadarChartUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LQRadarChart;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D7FEA7FE1D3788DA0096B237 /* Build configuration list for PBXProject "LQRadarChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7FEA82E1D3788DB0096B237 /* Debug */,
+				D7FEA82F1D3788DB0096B237 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7FEA8301D3788DB0096B237 /* Build configuration list for PBXNativeTarget "LQRadarChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7FEA8311D3788DB0096B237 /* Debug */,
+				D7FEA8321D3788DB0096B237 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D7FEA8331D3788DB0096B237 /* Build configuration list for PBXNativeTarget "LQRadarChartTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7FEA8341D3788DB0096B237 /* Debug */,
+				D7FEA8351D3788DB0096B237 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D7FEA8361D3788DB0096B237 /* Build configuration list for PBXNativeTarget "LQRadarChartUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7FEA8371D3788DB0096B237 /* Debug */,
+				D7FEA8381D3788DB0096B237 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D7FEA7FB1D3788DA0096B237 /* Project object */;
+}
