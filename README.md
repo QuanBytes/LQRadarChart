@@ -13,10 +13,9 @@ LQRadarChart 是一个简单的可定制的雷达图
 
 |基本概念|描述|演示|
 |---|---|---|
-|Step|背景多边形圈数, 最小值为1|![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true) ![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true)|
-|Row|多边形边数, 最小值为三|![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true) ![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true)|
-|Section|同时展现数据组数|![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true) ![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true)|
-
+|Step|背景多边形圈数, 最小值为1|![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true)
+|Row|多边形边数, 最小值为三|![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true) 
+|Section|同时展现数据组数|![image](https://github.com/MrLQ/LQRadarChart/blob/master/demo1.png?raw=true)
 
 ### LQRadarChartDataSource
 
