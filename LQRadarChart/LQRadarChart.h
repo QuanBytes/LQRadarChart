@@ -12,7 +12,6 @@
 
 @protocol LQRadarChartDataSource <NSObject>
 
-@optional
 - (NSInteger)numberOfStepForRadarChart:(LQRadarChart *)radarChart;
 - (NSInteger)numberOfRowForRadarChart:(LQRadarChart *)radarChart;
 - (NSInteger)numberOfSectionForRadarChart:(LQRadarChart *)radarChart;
@@ -22,8 +21,6 @@
 @end
 
 @protocol LQRadarChartDelegate <NSObject>
-
-@optional
 
 - (UIColor *)colorOfTitleForRadarChart:(LQRadarChart *)radarChart;
 - (UIColor *)colorOfLineForRadarChart:(LQRadarChart *)radarChart;
