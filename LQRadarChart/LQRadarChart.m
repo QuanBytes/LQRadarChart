@@ -110,7 +110,7 @@
         CGRect rect = CGRectMake(legendCenter.x - width / 2.0, legendCenter.y - height/2.0, width, height);
         [title drawInRect:rect withAttributes:attributes];
     }
-    
+   
     /// Draw the background rectangle
     CGContextSaveGState(context);
     [lineColor setStroke];
@@ -126,7 +126,7 @@
             CGFloat i = (CGFloat)index;
             if (index == 0) {
                 CGFloat x = _centerPoint.x;
-                CGFloat y = _centerPoint.y;
+                CGFloat y = _centerPoint.y -  innserRadius ;
                 [path moveToPoint:CGPointMake(x, y)];
             }else{
                 CGFloat x = _centerPoint.x - innserRadius * sin(i * perAngle);
@@ -134,7 +134,6 @@
                 [path addLineToPoint:CGPointMake(x, y)];
             }
         }
-        
         CGFloat x = _centerPoint.x;
         CGFloat y = _centerPoint.y - innserRadius;
        [path addLineToPoint:CGPointMake(x, y)];
@@ -163,14 +162,13 @@
     
     if (numOfRow > 0) {
         for (NSInteger section = 0;section < numOfSection; section ++) {
-            
             UIColor * fillColor = [_delegate colorOfSectionFillForRadarChart:self section: section];
             UIColor *  borderColor = [_delegate colorOfSectionBorderForRadarChart:self  section: section];
             
             UIBezierPath * path = [UIBezierPath bezierPath];
             for (NSInteger index = 0; index < numOfRow; index ++) {
                 CGFloat i = (CGFloat)(index);
-                CGFloat value = [_dataSource valueOfSectionForRadarChart:self row:0  section:section];
+                CGFloat value = [_dataSource valueOfSectionForRadarChart:self row:index  section:section];
                 CGFloat scale = (value - minValue)/(maxValue - minValue);
                 CGFloat innserRadius = scale * radius;
                 if (index == 0 ){
