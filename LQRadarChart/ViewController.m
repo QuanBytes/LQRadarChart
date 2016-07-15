@@ -35,7 +35,7 @@
 }
 - (NSInteger)numberOfRowForRadarChart:(LQRadarChart *)radarChart
 {
-    return 6;
+    return 7;
 }
 - (NSInteger)numberOfSectionForRadarChart:(LQRadarChart *)radarChart
 {
@@ -43,7 +43,8 @@
 }
 - (NSString *)titleOfRowForRadarChart:(LQRadarChart *)radarChart row:(NSInteger)row
 {
-    return [NSString stringWithFormat:@"NO.%ld",row];
+    NSArray * title = @[@"刺杀",@"生存",@"助攻",@"物理",@"魔法",@"防御",@"金钱"];
+    return title[row];
 }
 - (CGFloat)valueOfSectionForRadarChart:(LQRadarChart *)radarChart row:(NSInteger)row section:(NSInteger)section
 {
