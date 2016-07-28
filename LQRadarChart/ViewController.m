@@ -25,13 +25,14 @@
     chart.radius = w / 3;
     chart.delegate = self;
     chart.dataSource = self;
+    chart.showPoint = NO;
     [chart reloadData];
     [self.view addSubview:chart];
 }
 
 - (NSInteger)numberOfStepForRadarChart:(LQRadarChart *)radarChart
 {
-    return 5;
+    return 7;
 }
 - (NSInteger)numberOfRowForRadarChart:(LQRadarChart *)radarChart
 {
@@ -39,32 +40,38 @@
 }
 - (NSInteger)numberOfSectionForRadarChart:(LQRadarChart *)radarChart
 {
-    return 2;
+    return 1;
 }
 - (NSString *)titleOfRowForRadarChart:(LQRadarChart *)radarChart row:(NSInteger)row
 {
-    NSArray * title = @[@"刺杀",@"生存",@"助攻",@"物理",@"魔法",@"防御",@"金钱"];
+    NSArray * title = @[@"社交征信",@"社保公积金征信",@"助攻",@"物理",@"魔法",@"防御",@"金钱"];
     return title[row];
 }
 - (CGFloat)valueOfSectionForRadarChart:(LQRadarChart *)radarChart row:(NSInteger)row section:(NSInteger)section
 {
     if (section == 0 ){
-        return (CGFloat)(MAX(MIN(row + 1, 4), 3));
+        return row;
     } else {
         return 3;
     }
 }
 
-
+- (UIColor *)colorOfSeparateLineForRadarChart:(LQRadarChart *)radarChart
+{
+    return [UIColor clearColor];
+}
 
 - (UIColor *)colorOfTitleForRadarChart:(LQRadarChart *)radarChart
 {
     return [UIColor blackColor];
 
 }
-- (UIColor *)colorOfLineForRadarChart:(LQRadarChart *)radarChart
+- (UIColor *)colorOfLineForRadarChart:(LQRadarChart *)radarChart step:(NSInteger)step
 {
-    return [UIColor colorWithRed:0.337 green:0.847 blue:0.976 alpha:1];
+    if (step == 7) {
+        return [UIColor blueColor];
+    }
+    return [UIColor clearColor];
 
 }
 - (UIColor *)colorOfFillStepForRadarChart:(LQRadarChart *)radarChart step:(NSInteger)step
@@ -81,9 +88,11 @@
             color = [UIColor colorWithRed:0.831 green:0.949 blue:0.984 alpha:1];
             break;
         case 4:
-            color = [UIColor colorWithRed:0.922 green:0.976 blue:0.998 alpha:1];
+            color = [UIColor blueColor];//[UIColor colorWithRed:0.922 green:0.976 blue:0.998 alpha:1];
             break;
-            
+        case 5:
+            color = [UIColor blackColor];
+            break;
         default:
             break;
     }
@@ -100,7 +109,8 @@
 - (UIColor *)colorOfSectionBorderForRadarChart:(LQRadarChart *)radarChart section:(NSInteger)section
 {
     if (section == 0) {
-        return [UIColor colorWithRed:1 green:0.867 blue:0.012 alpha:0.4];
+//        return [UIColor colorWithRed:1 green:0.867 blue:0.012 alpha:0.4];
+        return [UIColor clearColor];
     }else{
         return [UIColor colorWithRed:0 green:0.788 blue:0.543 alpha:0.4];
     }
@@ -109,9 +119,16 @@
 - (UIFont *)fontOfTitleForRadarChart:(LQRadarChart *)radarChart
 {
     return [UIFont systemFontOfSize:11];
-
 }
 
+- (void)radarChart:(LQRadarChart *)radarChart didSelectedItemAtIndex:(NSInteger)index
+{
+    NSLog(@"%ld",(long)index);
+}
+- (CGFloat)maxValueForRadarChart:(LQRadarChart *)radarChart
+{
+    return 7;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
