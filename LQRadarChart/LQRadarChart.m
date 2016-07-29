@@ -7,9 +7,8 @@
 //
 
 #import "LQRadarChart.h"
-
+static const NSInteger LQRadarChartTitleButtonTag = 32000;
 @implementation LQRadarChart
-
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -29,11 +28,20 @@
     return self;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self _baseConfig];
+    }
+    return self;
+}
+
 - (CGRect)frame
 {
     CGRect frame = [super frame];
     if (self.autoCenterPoint) {
-        self.centerPoint = CGPointMake(frame.size.width/2, frame.size.height/2);
+        self.centerPoint = CGPointMake(frame.size.width/2, frame.size.height/2 -10);
     }
     
     if (MIN(frame.size.width, frame.size.height) < self.radius * 2) {
@@ -49,12 +57,9 @@
 - (void)_baseConfig
 {
     _radius = 80;
-    _minValue = 0;
-    _maxValue = 5;
     _showPoint = true;
-    _showBorder = true;
     _fillArea = true;
-    _clockwise = false;
+    _clockwise = true;
     _autoCenterPoint = true;
     
     [self reloadData];
@@ -67,59 +72,106 @@
     if (!self.dataSource || !context) {
         return;
     }
+    UIFont * textFont = [UIFont systemFontOfSize:13];
+    if ([_delegate respondsToSelector:@selector(fontOfTitleForRadarChart:)]) {
+        textFont = [_delegate fontOfTitleForRadarChart:self];
+    }
     
-    UIFont * textFont = [_delegate fontOfTitleForRadarChart:self];
-    NSInteger numOfSetp = MAX([_dataSource numberOfStepForRadarChart:self], 1);
-    NSInteger numOfRow = [_dataSource numberOfRowForRadarChart:self];
-    NSInteger numOfSection = [_dataSource numberOfSectionForRadarChart:self];
-    CGFloat perAngle = (CGFloat)(M_PI * 2) / (CGFloat)(numOfRow) * (CGFloat)(self.clockwise ? 1 : -1);
-    CGFloat padding = (CGFloat)(2);
-    CGFloat height = textFont.lineHeight;
+    _numberOfStep = MAX([_dataSource numberOfStepForRadarChart:self], 1);
+    _numberOfRow = [_dataSource numberOfRowForRadarChart:self];
+    _numberOfSection = [_dataSource numberOfSectionForRadarChart:self];
+    
+    CGFloat perAngle = (CGFloat)(M_PI * 2) / (CGFloat)(_numberOfRow) * (CGFloat)(self.clockwise ? 1 : -1);
+    CGFloat padding = (CGFloat)(3);
+    CGFloat height = MAX(textFont.lineHeight,25);
     CGFloat radius = _radius;
-    CGFloat minValue = _minValue;
-    CGFloat maxValue = _maxValue;
-    
-    UIColor * lineColor = [_delegate colorOfLineForRadarChart:self];
+    CGFloat minValue = 0;
+    if ([_dataSource respondsToSelector:@selector(minValueForRadarChart:)]) {
+        minValue = [_dataSource minValueForRadarChart:self];
+    }
+    CGFloat maxValue = [_dataSource maxValueForRadarChart:self];;
     
     /// Create  titles
-    UIColor * titleColor = [_delegate colorOfTitleForRadarChart:self];
+    UIColor *titleColor = [UIColor blackColor];
+    if ([_delegate respondsToSelector:@selector(colorOfTitleForRadarChart:)]) {
+        titleColor = [_delegate colorOfTitleForRadarChart:self];
+    }
+    [self createTitleButtonsWithNumOfRow:_numberOfRow Radius:radius PerAngle:perAngle TextFont:textFont Height:height Padding:padding TitleColor:titleColor];
+    CGContextSaveGState(context);
+    
+    /// Draw the background rectangle
+    [self createBackgroundWithNumOfStep:_numberOfStep Radius:radius NumOfRow:_numberOfRow PerAngle:perAngle];
+    CGContextRestoreGState(context);
+    
+    UIColor *separateLineColor = [UIColor grayColor];
+    if ([_delegate respondsToSelector:@selector(colorOfSeparateLineForRadarChart:)]) {
+        separateLineColor = [_delegate colorOfSeparateLineForRadarChart:self];
+    }
+    [separateLineColor setStroke];
+    [self createLineWithNumOfRow:_numberOfRow Radius:radius PerAngle:perAngle];
+    
+    if (_numberOfRow > 0) {
+        [self createSectionsWithNumOfSection:_numberOfSection NumOfRow:_numberOfRow MaxValue:maxValue MinValue:minValue Radius:radius PerAngle:perAngle Context:context];
+    }
+}
+
+- (void)createTitleButtonsWithNumOfRow:(NSInteger)numOfRow Radius:(CGFloat)radius PerAngle:(CGFloat)perAngle TextFont:(UIFont *)textFont Height:(CGFloat)height Padding:(CGFloat)padding TitleColor:(UIColor *)titleColor
+{
     for (NSInteger index = 0; index<numOfRow; index ++) {
         NSInteger i = (CGFloat)index;
-        NSString * title = [_dataSource titleOfRowForRadarChart:self row:index];
+        NSString *title = [NSString string];
+        if ([_dataSource respondsToSelector:@selector(titleOfRowForRadarChart:row:)]) {
+            title = [_dataSource titleOfRowForRadarChart:self row:index];
+        }
         CGPoint pointOnEdge = CGPointMake(_centerPoint.x - radius * sin(i * perAngle),
                                           _centerPoint.y - radius * cos(i * perAngle));
         CGSize attributeTextSize = [title sizeWithAttributes:@{NSFontAttributeName:textFont}];
-        
         CGFloat width = attributeTextSize.width;
-        CGFloat xOffset = pointOnEdge.x >=  _centerPoint .x ? width / 2.0 + padding : -width / 2.0 - padding;
-        CGFloat yOffset = pointOnEdge.y >=  _centerPoint .y ? height / 2.0 + padding : -height / 2.0 - padding;
-        CGPoint legendCenter = CGPointMake(pointOnEdge.x + xOffset,
-                                           pointOnEdge.y + yOffset);
         
-        NSMutableParagraphStyle *paragraphStyle = [NSParagraphStyle defaultParagraphStyle].mutableCopy;
-        paragraphStyle.alignment = NSTextAlignmentCenter;
-        paragraphStyle.lineBreakMode = NSLineBreakByClipping;
-        NSDictionary * attributes = @{NSFontAttributeName: textFont,
-                                      NSParagraphStyleAttributeName: paragraphStyle,
-                                      NSForegroundColorAttributeName: titleColor};
+        CGPoint legendCenter = CGPointMake(pointOnEdge.x, pointOnEdge.y);
         
-        if (index == 0 || (numOfRow%2 == 0 && index == numOfRow/2)) {
-            legendCenter.x = _centerPoint.x;
-            legendCenter.y = _centerPoint.y + (radius + padding + height / 2.0) *(CGFloat)(index == 0 ? -1 : 1);
+        CGRect aRect = CGRectMake(legendCenter.x - width / 2.0, legendCenter.y - height/2.0, width, height);
+        if ([_delegate respondsToSelector:@selector(titleRectForRadarChart:row:currentRect:)]) {
+            aRect = [_delegate titleRectForRadarChart:self row:index currentRect:aRect];
+        } else {
+            CGFloat xOffset = pointOnEdge.x >=  _centerPoint .x ? width / 2.0 + padding : -width / 2.0 - padding;
+            CGFloat yOffset = pointOnEdge.y >=  _centerPoint .y ? height / 2.0 + padding : -height / 2.0 - padding;
+            CGPoint legendCenter = CGPointMake(pointOnEdge.x + xOffset,
+                                               pointOnEdge.y + yOffset);
+            if (index == 0 || (numOfRow%2 == 0 && index == numOfRow/2)) {
+                legendCenter.x = _centerPoint.x;
+                legendCenter.y = _centerPoint.y + (radius + padding + height / 2.0) *(CGFloat)(index == 0 ? -1 : 1);
+            }
+            aRect = CGRectMake(legendCenter.x - width / 2.0, legendCenter.y - height/2.0, width, height);
         }
-        CGRect rect = CGRectMake(legendCenter.x - width / 2.0, legendCenter.y - height/2.0, width, height);
-        [title drawInRect:rect withAttributes:attributes];
-    }
-   
-    /// Draw the background rectangle
-    CGContextSaveGState(context);
-    [lineColor setStroke];
-    
-    for (NSInteger stepTemp = 1; stepTemp <= numOfSetp; stepTemp ++) {
-        NSInteger step = numOfSetp - stepTemp + 1;
-        UIColor * fillColor = [_delegate colorOfFillStepForRadarChart:self step:step];
         
-        CGFloat scale = (CGFloat)((CGFloat)step / (CGFloat)numOfSetp);
+        UIButton *titleButton = [[UIButton alloc] initWithFrame:aRect];
+        titleButton.tag = LQRadarChartTitleButtonTag + index;
+        [titleButton setTitleColor:titleColor forState:UIControlStateNormal];
+        [titleButton setTitle:title forState:UIControlStateNormal];
+        [titleButton.titleLabel setFont:textFont];
+        [titleButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:titleButton];
+    }
+}
+
+- (void)createBackgroundWithNumOfStep:(NSInteger)numOfStep Radius:(CGFloat)radius NumOfRow:(NSInteger)numOfRow PerAngle:(CGFloat)perAngle
+{
+    for (NSInteger stepTemp = 1; stepTemp <= numOfStep; stepTemp ++) {
+        NSInteger step = numOfStep - stepTemp + 1;
+        
+        UIColor *lineColor = [UIColor grayColor];
+        if ([_delegate respondsToSelector:@selector(colorOfLineForRadarChart:step:)]) {
+            lineColor = [_delegate colorOfLineForRadarChart:self step:step];
+        }
+        [lineColor setStroke];
+        
+        UIColor *fillColor = [UIColor whiteColor];
+        if ([_delegate respondsToSelector:@selector(colorOfFillStepForRadarChart:step:)]) {
+            fillColor = [_delegate colorOfFillStepForRadarChart:self step:step];
+        }
+        
+        CGFloat scale = (CGFloat)((CGFloat)step / (CGFloat)numOfStep);
         CGFloat innserRadius = scale * radius;
         UIBezierPath * path = [UIBezierPath bezierPath];
         for (NSInteger index = 0; index < numOfRow; index ++) {
@@ -136,19 +188,17 @@
         }
         CGFloat x = _centerPoint.x;
         CGFloat y = _centerPoint.y - innserRadius;
-       [path addLineToPoint:CGPointMake(x, y)];
-        
+        [path addLineToPoint:CGPointMake(x, y)];
         
         [fillColor setFill];
-        
-        path.lineWidth = 1;
-        [path  fill];
+        path.lineWidth = 1.5;
+        [path fill];
         [path stroke];
-        
     }
-    CGContextRestoreGState(context);
-    
-    [lineColor setStroke];
+}
+
+- (void)createLineWithNumOfRow:(NSInteger)numOfRow Radius:(CGFloat)radius PerAngle:(CGFloat)perAngle
+{
     for (NSInteger index = 0; index < numOfRow; index ++) {
         CGFloat i = (CGFloat)(index);
         UIBezierPath * path = [UIBezierPath bezierPath];
@@ -157,58 +207,66 @@
         CGFloat y = _centerPoint.y - radius * cos(i * perAngle);
         [path addLineToPoint:CGPointMake(x, y)];
         [path stroke];
-        
     }
-    
-    if (numOfRow > 0) {
-        for (NSInteger section = 0;section < numOfSection; section ++) {
-            UIColor * fillColor = [_delegate colorOfSectionFillForRadarChart:self section: section];
-            UIColor *  borderColor = [_delegate colorOfSectionBorderForRadarChart:self  section: section];
-            
-            UIBezierPath * path = [UIBezierPath bezierPath];
-            for (NSInteger index = 0; index < numOfRow; index ++) {
-                CGFloat i = (CGFloat)(index);
-                CGFloat value = [_dataSource valueOfSectionForRadarChart:self row:index  section:section];
-                CGFloat scale = (value - minValue)/(maxValue - minValue);
-                CGFloat innserRadius = scale * radius;
-                if (index == 0 ){
-                    CGFloat x = _centerPoint.x;
-                    CGFloat y = _centerPoint.y -  innserRadius;
-                    [path moveToPoint:CGPointMake(x, y)];
-                } else {
-                    CGFloat x = _centerPoint.x - innserRadius * sin(i * perAngle);
-                    CGFloat y = _centerPoint.y - innserRadius * cos(i * perAngle);
-                    [path addLineToPoint:CGPointMake(x, y)];
-                }
+}
+
+- (void)createSectionsWithNumOfSection:(NSInteger)numOfSection NumOfRow:(NSInteger)numOfRow MaxValue:(CGFloat)maxValue MinValue:(CGFloat)minValue Radius:(CGFloat)radius PerAngle:(CGFloat)perAngle Context:(CGContextRef)context
+{
+    for (NSInteger section = 0;section < numOfSection; section ++) {
+        UIColor *fillColor = [[UIColor blueColor] colorWithAlphaComponent:0.4];
+        if ([_delegate respondsToSelector:@selector(colorOfSectionFillForRadarChart:section:)]) {
+            fillColor = [_delegate colorOfSectionFillForRadarChart:self section:section];
+        }
+        UIColor *borderColor = [[UIColor blueColor] colorWithAlphaComponent:0.8];
+        if ([_delegate respondsToSelector:@selector(colorOfSectionBorderForRadarChart:section:)]) {
+            borderColor = [_delegate colorOfSectionBorderForRadarChart:self section:section];
+        }
+        
+        UIBezierPath * path = [UIBezierPath bezierPath];
+        for (NSInteger index = 0; index <= numOfRow; index ++) {
+            CGFloat i = (CGFloat)(index);
+            CGFloat value = [_dataSource valueOfSectionForRadarChart:self row:index  section:section];
+            value = MIN(value, maxValue);
+            CGFloat scale = (value - minValue)/(maxValue - minValue);
+            CGFloat innserRadius = scale * radius;
+            if (index == 0 ){
+                CGFloat x = _centerPoint.x;
+                CGFloat y = _centerPoint.y -  innserRadius;
+                [path moveToPoint:CGPointMake(x, y)];
+            } else {
+                CGFloat x = _centerPoint.x - innserRadius * sin(i * perAngle);
+                CGFloat y = _centerPoint.y - innserRadius * cos(i * perAngle);
+                [path addLineToPoint:CGPointMake(x, y)];
             }
-            
-            CGFloat value = [_dataSource valueOfSectionForRadarChart:self row: 0 section: section];
-            CGFloat x = _centerPoint.x;
-            CGFloat y = _centerPoint.y - (value - minValue) / (maxValue - minValue) * radius;
-            [path addLineToPoint:CGPointMake(x, y)];
-
-            [fillColor setFill];
-            [borderColor setStroke];
-   
-            path.lineWidth = 2;
-            [path fill];
-            [path stroke];
-            
-            
-            if (self.showPoint) {
-                UIColor *borderColor = [_delegate colorOfSectionBorderForRadarChart:self section:section];
-                for (NSInteger i = 0; i < numOfRow; i ++) {
-                    CGFloat value = [_dataSource valueOfSectionForRadarChart:self row:i section:section];
-                    CGFloat xVal = _centerPoint.x - (value - minValue) / (maxValue - minValue) * radius * sin((CGFloat)(i) * perAngle);
-                    CGFloat yVal = _centerPoint.y - (value - minValue) / (maxValue - minValue) * radius * cos((CGFloat)(i) * perAngle);
-                    [borderColor setFill];
-                    CGContextFillEllipseInRect(context, CGRectMake(xVal-3, yVal-3, 6, 6));
-
-                }
+        }
+        
+        CGFloat value = [_dataSource valueOfSectionForRadarChart:self row: 0 section: section];
+        value = MIN(value,maxValue);
+        CGFloat x = _centerPoint.x;
+        CGFloat y = _centerPoint.y - (value - minValue) / (maxValue - minValue) * radius;
+        [path addLineToPoint:CGPointMake(x, y)];
+        
+        [fillColor setFill];
+        [borderColor setStroke];
+        
+        path.lineWidth = 1;
+        [path fill];
+        [path stroke];
+        
+        if (self.showPoint) {
+            UIColor *borderColor = [UIColor grayColor];
+            if ([_delegate respondsToSelector:@selector(colorOfSectionBorderForRadarChart:section:)]) {
+                borderColor = [_delegate colorOfSectionBorderForRadarChart:self section:section];
+            }
+            for (NSInteger i = 0; i < numOfRow; i ++) {
+                CGFloat value = [_dataSource valueOfSectionForRadarChart:self row:i section:section];
+                CGFloat xVal = _centerPoint.x - (value - minValue) / (maxValue - minValue) * radius * sin((CGFloat)(i) * perAngle);
+                CGFloat yVal = _centerPoint.y - (value - minValue) / (maxValue - minValue) * radius * cos((CGFloat)(i) * perAngle);
+                [borderColor setFill];
+                CGContextFillEllipseInRect(context, CGRectMake(xVal-3, yVal-3, 6, 6));
             }
         }
     }
-
 }
 
 - (void)reloadData
@@ -216,4 +274,11 @@
     [self setNeedsDisplay];
 }
 
+- (IBAction)buttonClicked:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    if ([_delegate respondsToSelector:@selector(radarChart:didSelectedItemAtIndex:)]) {
+        [_delegate radarChart:self didSelectedItemAtIndex:button.tag - LQRadarChartTitleButtonTag];
+    }
+}
 @end
