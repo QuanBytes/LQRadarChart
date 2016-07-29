@@ -36,7 +36,7 @@
 }
 - (NSInteger)numberOfRowForRadarChart:(LQRadarChart *)radarChart
 {
-    return 7;
+    return 5;
 }
 - (NSInteger)numberOfSectionForRadarChart:(LQRadarChart *)radarChart
 {
